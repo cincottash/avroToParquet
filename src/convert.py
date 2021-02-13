@@ -24,6 +24,6 @@ def csvToParquet():
 	df.to_parquet('../parquetFiles/twitter.parquet')
 
 def deleteCSV():
-	csvFiles = glob.glob('../csvFiles/*')
+	csvFiles = glob.glob('../csvFiles/*.csv')
 	for file in csvFiles:
 	    os.remove(file)
