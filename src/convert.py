@@ -1,5 +1,3 @@
-from avro.datafile import DataFileReader, DataFileWriter
-from avro.io import DatumReader, DatumWriter
 from fastavro import reader
 import csv
 import pandas as pd
