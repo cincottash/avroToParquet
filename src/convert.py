@@ -37,9 +37,9 @@ def avroToCSV(avroDirectory, csvDirectory):
 
 	print('Converted {} .avro files to .csv\n'.format(convertedFileCount))
 	if(len(failedConversions) > 0):
-		print('Failed to convert {} to .csv\n'.format(failedConversions))
+		print('Failed to convert {} to .csv, ignoring files\n'.format(failedConversions))
 	else:
-		print('Successfully Converted all files to .csv\n')
+		print('Successfully Converted all .avro files to .csv\n')
 
 def csvToParquet(csvDirectory, parquetDirectory):
 	failedConversions=[]
@@ -54,12 +54,12 @@ def csvToParquet(csvDirectory, parquetDirectory):
 				failedConversions.append(filename)
 				continue
 		convertedFileCount += 1
-		
+
 	print('Converted {} .csv files to .parquet\n'.format(convertedFileCount))
 	if(len(failedConversions) > 0):
 		print('Failed to convert {} to .parquet\n'.format(failedConversions))
 	else:
-		print('Successfully Converted all files to .parquet\n')
+		print('Successfully converted all .csv files to .parquet\n')
 
 def deleteCSV(csvDirectory):
 	for filename in os.listdir(csvDirectory):

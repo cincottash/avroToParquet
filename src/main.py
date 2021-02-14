@@ -3,7 +3,7 @@ from convert import *
 
 def main():
 
-	avroDirectory, csvDirectory, parquetDirectory = dirSetup('../avroFiles/', '../csvFilesTemp/', '../parquetFiles/')
+	avroDirectory, csvDirectory, parquetDirectory = dirSetup()
 	
 	avroToCSV(avroDirectory, csvDirectory)
 	

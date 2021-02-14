@@ -1,7 +1,20 @@
 import os 
+from pathlib import Path
 
-def dirSetup(avroDirectory, csvDirectory, parquetDirectory):
+def dirSetup():
+
+	avroDirectory = str(input('Please input the folder containing .avro files\n'))
 	
+	#make sure avro files folder exists
+	if not os.path.isdir(avroDirectory):
+		print('Error, missing avro files direcectory')
+		exit(0)
+
+	#the output dir is one level above the .avro src files dir
+	outputDirectory = str(Path(avroDirectory).parents[0])
+	csvDirectory = outputDirectory + '/csvFilesTemp/'
+	parquetDirectory = outputDirectory + '/parquetFiles/'
+
 	#if csv dir already exists, clear all the files in it
 	if os.path.isdir(csvDirectory):
 		print('Clearing temp csvFiles directory\n')
