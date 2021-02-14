@@ -2,7 +2,7 @@ import os
 
 def dirSetup(avroDirectory, csvDirectory, parquetDirectory):
 	
-	#if csv dir already exists, delete the current csv files in it
+	#if csv dir already exists, clear all the files in it
 	if os.path.isdir(csvDirectory):
 		print('Clearing temp csvFiles directory\n')
 		deletedFileCount = 0
