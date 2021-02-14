@@ -1,4 +1,3 @@
-from exceptions import *
 import os 
 
 def dirSetup(avroDirectory, csvDirectory, parquetDirectory):
