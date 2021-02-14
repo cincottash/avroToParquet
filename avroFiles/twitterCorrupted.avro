@@ -1,1 +1,0 @@
-Objavro.codecnullavro.schemaò{"type":"record","name":"twitter_schema","namespace":"com.miguno.avro","fields":[{"name":"username","type":"string","doc":"Name 
