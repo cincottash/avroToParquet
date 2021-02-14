@@ -36,7 +36,7 @@ def avroToCSV(avroDirectory, csvDirectory):
 			convertedFiles += 1
 
 	print('Converted {} .avro files\n'.format(convertedFiles))
-	print('Failed to convert {}'.format(failedConversions))
+	print('Failed to convert {}\n'.format(failedConversions))
 
 def csvToParquet(csvDirectory, parquetDirectory):
 	for filename in os.listdir(csvDirectory):
