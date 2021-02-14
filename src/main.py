@@ -2,8 +2,10 @@ from setup import *
 from convert import *
 
 def main():
-	avroToCSV()
-	csvToParquet()
+	avroToCSV('../avroFiles/', '../csvFiles/')
+	
+	csvToParquet('../csvFiles/', '../parquetFiles/')
+	
 	deleteCSV()
 
 if __name__ == '__main__':
