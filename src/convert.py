@@ -5,7 +5,7 @@ import os
 
 def avroToCSV(avroDirectory, csvDirectory):
 	failedConversions = []
-	convertedFiles = 0
+	convertedFileCount = 0
 
 	print('Converting .avro files to csv\n')
 
@@ -33,9 +33,9 @@ def avroToCSV(avroDirectory, csvDirectory):
 						head = False
 					csvFile.writerow(data.values())
 			avroFile.close()
-			convertedFiles += 1
+			convertedFileCount += 1
 
-	print('Converted {} .avro files to .csv\n'.format(convertedFiles))
+	print('Converted {} .avro files to .csv\n'.format(convertedFileCount))
 	if(len(failedConversions) > 0):
 		print('Failed to convert {} to .csv\n'.format(failedConversions))
 	else:
@@ -43,6 +43,7 @@ def avroToCSV(avroDirectory, csvDirectory):
 
 def csvToParquet(csvDirectory, parquetDirectory):
 	failedConversions=[]
+	convertedFileCount = 0
 	print('Converting .csv files to .parquet\n')
 	for filename in os.listdir(csvDirectory):
 		if filename.endswith('.csv'):
@@ -52,6 +53,9 @@ def csvToParquet(csvDirectory, parquetDirectory):
 			except Exception:
 				failedConversions.append(filename)
 				continue
+		convertedFileCount += 1
+		
+	print('Converted {} .csv files to .parquet\n'.format(convertedFileCount))
 	if(len(failedConversions) > 0):
 		print('Failed to convert {} to .parquet\n'.format(failedConversions))
 	else:
