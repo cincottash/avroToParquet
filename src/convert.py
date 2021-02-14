@@ -20,7 +20,7 @@ def avroToCSV(avroDirectory, csvDirectory):
 			with open(avroDirectory + filename, 'rb') as avroFile:
 				try:
 					avroReader = reader(avroFile)
-				except ValueError:
+				except Exception:
 					failedConversions.append(filename)
 					os.remove(csvDirectory + filename.replace('.avro', '.csv'))
 					continue
