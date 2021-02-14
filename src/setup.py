@@ -3,13 +3,6 @@ import os
 
 def dirSetup(avroDirectory, csvDirectory, parquetDirectory):
 	
-	try:  
-		if not os.path.isdir(avroDirectory):
-			raise NotADirectoryError("Avro source directory does not exist")
-	#avroFiles doesn't exist error
-	except NotADirectoryError as error:
-		print(error)
-	
 	#if csv dir already exists, delete the current csv files in it
 	if os.path.isdir(csvDirectory):
 		print('Clearing temp csvFiles directory')
