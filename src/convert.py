@@ -2,7 +2,6 @@ from fastavro import reader
 import csv
 import pandas as pd
 import os
-import glob
 
 def avroToCSV(avroDirectory, csvDirectory):
 	failedConversions = []
