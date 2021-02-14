@@ -27,9 +27,4 @@ def dirSetup(avroDirectory, csvDirectory, parquetDirectory):
 		os.mkdir(parquetDirectory)  
 		print('Created parquetFiles directory\n')
 
-	
-
-
-
-
 	return avroDirectory, csvDirectory, parquetDirectory
