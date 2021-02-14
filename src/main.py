@@ -2,11 +2,14 @@ from setup import *
 from convert import *
 
 def main():
-	avroToCSV('../avroFiles/', '../csvFiles/')
+
+	avroDirectory, csvDirectory, parquetDirectory = dirSetup('../avroFiles/', '../csvFilesTemp/', '../parquetFiles/')
 	
-	csvToParquet('../csvFiles/', '../parquetFiles/')
+	avroToCSV(avroDirectory, csvDirectory)
 	
-	deleteCSV()
+	csvToParquet(csvDirectory, parquetDirectory)
+	
+	deleteCSV(csvDirectory)
 
 if __name__ == '__main__':
 	main()
