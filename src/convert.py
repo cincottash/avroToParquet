@@ -7,7 +7,7 @@ def avroToCSV(avroDirectory, csvDirectory):
 	failedConversions = []
 	convertedFiles = 0
 
-	print('Converting .avro files')
+	print('Converting .avro files to csv\n')
 
 	for filename in os.listdir(avroDirectory):
 		if filename.endswith('.avro'):
@@ -35,14 +35,27 @@ def avroToCSV(avroDirectory, csvDirectory):
 			avroFile.close()
 			convertedFiles += 1
 
-	print('Converted {} .avro files\n'.format(convertedFiles))
-	print('Failed to convert {}\n'.format(failedConversions))
+	print('Converted {} .avro files to .csv\n'.format(convertedFiles))
+	if(len(failedConversions) > 0):
+		print('Failed to convert {} to .csv\n'.format(failedConversions))
+	else:
+		print('Successfully Converted all files to .csv\n')
 
 def csvToParquet(csvDirectory, parquetDirectory):
+	failedConversions=[]
+	print('Converting .csv files to .parquet\n')
 	for filename in os.listdir(csvDirectory):
 		if filename.endswith('.csv'):
-			csvFile = pd.read_csv(csvDirectory + filename)
-			csvFile.to_parquet(parquetDirectory + filename.replace('.csv', '.parquet'))
+			try:
+				csvFile = pd.read_csv(csvDirectory + filename)
+				csvFile.to_parquet(parquetDirectory + filename.replace('.csv', '.parquet'))
+			except Exception:
+				failedConversions.append(filename)
+				continue
+	if(len(failedConversions) > 0):
+		print('Failed to convert {} to .parquet\n'.format(failedConversions))
+	else:
+		print('Successfully Converted all files to .parquet\n')
 
 def deleteCSV(csvDirectory):
 	for filename in os.listdir(csvDirectory):

@@ -4,7 +4,7 @@ def dirSetup(avroDirectory, csvDirectory, parquetDirectory):
 	
 	#if csv dir already exists, delete the current csv files in it
 	if os.path.isdir(csvDirectory):
-		print('Clearing temp csvFiles directory')
+		print('Clearing temp csvFiles directory\n')
 		deletedFileCount = 0
 		for filename in os.listdir(csvDirectory):
 			os.remove(csvDirectory + filename)
@@ -16,7 +16,7 @@ def dirSetup(avroDirectory, csvDirectory, parquetDirectory):
 	
 	#if the parquet dir already exists, loop through it and delete every .parquet file in it
 	if os.path.isdir(parquetDirectory):
-		print('Deleting existing .parquet files')
+		print('Deleting existing .parquet files\n')
 		deletedFileCount = 0
 		for filename in os.listdir(parquetDirectory):
 			if(filename.endswith('.parquet')):
