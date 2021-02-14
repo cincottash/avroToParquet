@@ -23,6 +23,7 @@ def avroToCSV(avroDirectory, csvDirectory):
 				except Exception:
 					failedConversions.append(filename)
 					os.remove(csvDirectory + filename.replace('.avro', '.csv'))
+					avroFile.close()
 					continue
 			    
 				for data in avroReader:
