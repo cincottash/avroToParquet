@@ -14,25 +14,34 @@ def avroToCSV(avroDirectory, csvDirectory):
 			head = True
 			count = 0
 
-			csvFile = csv.writer(open(csvDirectory + filename.replace('.avro', '.csv'), 'w+'))
+			#make sure we have permission to write to a csv file
+			try:
+				csvFile = csv.writer(open(csvDirectory + filename.replace('.avro', '.csv'), 'w+'))
+			except PermissionError:
+				print("Error, don't have permission to write to csv file")
+				exit(0)
 
+			#try to convert avro files to csv, if any exception happens while trying to convert a file, skip to the next file
 			with open(avroDirectory + filename, 'rb') as avroFile:
 				
 				try:
 					avroReader = reader(avroFile)
+
+					for data in avroReader:
+				        #print(data)
+						if head == True:
+							header = data.keys()
+							csvFile.writerow(header)
+							head = False
+						csvFile.writerow(data.values())
 				except Exception:
-					failedConversions.append(filename)
-					os.remove(csvDirectory + filename.replace('.avro', '.csv'))
+					print('Failed to convert file {}\n'.format(avroFile))
 					avroFile.close()
+					failedConversions.append(filename)
+					os.remove(csvFile)
+					
 					continue
 			    
-				for data in avroReader:
-			        #print(data)
-					if head == True:
-						header = data.keys()
-						csvFile.writerow(header)
-						head = False
-					csvFile.writerow(data.values())
 			avroFile.close()
 			convertedFileCount += 1
 

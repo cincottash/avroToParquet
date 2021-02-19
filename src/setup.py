@@ -6,11 +6,17 @@ def dirSetup():
 	avroDirectory = str(input('Please input the folder containing .avro files\n'))
 	
 	#make sure avro files folder exists
-	if not os.path.isdir(avroDirectory):
+	try:
+		os.listdir(avroDirectory)
+
+		#make sure the path has a \ or / at the end, listdir still works even without the / or \
+		if(avroDirectory[len(avroDirectory)-1] != '\\' and avroDirectory[len(avroDirectory)-1] != '/'):
+			raise FileNotFoundError
+	except FileNotFoundError:
 		print('Error, missing avro files direcectory')
 		exit(0)
 
-	#the output dir is one level above the .avro src files dir
+	#the output dir is one level above the .avro files dir
 	outputDirectory = str(Path(avroDirectory).parents[0])
 	csvDirectory = outputDirectory + '/csvFilesTemp/'
 	parquetDirectory = outputDirectory + '/parquetFiles/'

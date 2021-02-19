@@ -8,7 +8,7 @@ Converts a given file from avro to parquet format
 
 * Converts each .avro file into a .CSV, stores the .CSV files in a temp directory
 
-* The CSV files are stored in a directory called "csvFilesTemp" located in the same directory as main.py
+* The CSV files are stored in a directory called "csvFilesTemp" located in the same directory as the avro files directory
 
 * If csvFilesTemp already exists (e.g from a previous-uncompleted run), ALL the files are removed
 
@@ -18,7 +18,7 @@ Converts a given file from avro to parquet format
 
 * After converting to .CSV, the files are converted to .parquet
 
-* The parquet files are stored in a directory called "parquetFiles" located in the same directory as main.py
+* The parquet files are stored in a directory called "parquetFiles" located in the same directory as the avro files directory
 
 * If the parquetFiles directory already exists, ALL of the .parquet files are deleted (only files with the .parquet file extension)
 
