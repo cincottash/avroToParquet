@@ -57,13 +57,13 @@ def csvToParquet(csvDirectory, parquetDirectory):
 			#try:
 			csvFile = pd.read_csv(csvDirectory + filename)
 			csvFile.to_parquet(parquetDirectory + filename.replace('.csv', '.parquet'))
-			#except ImportError:
-				#print("Please install the modules in requirements.txt\n")
-				#exit(0)
-			#except Exception:
-				#failedConversions.append(filename)
-				#os.remove(csvDirectory+filename)
-				#continue
+			except ImportError:
+				print("Please install the modules in requirements.txt\n")
+				exit(0)
+			except Exception:
+				failedConversions.append(filename)
+				os.remove(csvDirectory+filename)
+				continue
 		convertedFileCount += 1
 
 	print('Converted {} .csv files to .parquet\n'.format(convertedFileCount))
