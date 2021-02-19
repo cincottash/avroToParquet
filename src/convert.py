@@ -14,7 +14,7 @@ def avroToCSV(avroDirectory, csvDirectory):
 			head = True
 			count = 0
 
-			#make sure we have permission to write to a csv file
+			#make sure we have permission to write to a file
 			try:
 				csvFile = csv.writer(open(csvDirectory + filename.replace('.avro', '.csv'), 'w+'))
 			except PermissionError:
@@ -28,7 +28,6 @@ def avroToCSV(avroDirectory, csvDirectory):
 					avroReader = reader(avroFile)
 
 					for data in avroReader:
-				        #print(data)
 						if head == True:
 							header = data.keys()
 							csvFile.writerow(header)
@@ -54,7 +53,10 @@ def avroToCSV(avroDirectory, csvDirectory):
 def csvToParquet(csvDirectory, parquetDirectory):
 	failedConversions=[]
 	convertedFileCount = 0
+
 	print('Converting .csv files to .parquet\n')
+
+	#try to convert csv files to parquet, if any exception happens while trying to convert a file, skip to the next file
 	for filename in os.listdir(csvDirectory):
 		if filename.endswith('.csv'):
 			try:
@@ -66,14 +68,20 @@ def csvToParquet(csvDirectory, parquetDirectory):
 		convertedFileCount += 1
 
 	print('Converted {} .csv files to .parquet\n'.format(convertedFileCount))
+
 	if(len(failedConversions) > 0):
 		print('Failed to convert {} to .parquet\n'.format(failedConversions))
 	else:
 		print('Successfully converted all .csv files to .parquet\n')
 
+#delete csv files and then delete the temp directory
 def deleteCSV(csvDirectory):
-	for filename in os.listdir(csvDirectory):
-		os.remove(csvDirectory + filename)
-	
-	os.rmdir(csvDirectory)
+	try:
+		for filename in os.listdir(csvDirectory):
+			os.remove(csvDirectory + filename)
+		
+		os.rmdir(csvDirectory)
+	except PermissionError:
+		print('Error, you don\'t have permission to remove files/directories' )
+		exit(0)
 	print('Deleted temp csv directory')
