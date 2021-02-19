@@ -17,6 +17,7 @@ def avroToCSV(avroDirectory, csvDirectory):
 			csvFile = csv.writer(open(csvDirectory + filename.replace('.avro', '.csv'), 'w+'))
 
 			with open(avroDirectory + filename, 'rb') as avroFile:
+				
 				try:
 					avroReader = reader(avroFile)
 				except Exception:
@@ -55,6 +56,8 @@ def csvToParquet(csvDirectory, parquetDirectory):
 				continue
 		convertedFileCount += 1
 
+	#csvFile = pd.read_csv(csvDirectory + filename)
+	#csvFile.to_parquet(parquetDirectory + filename.replace('.csv', '.parquet'))
 	print('Converted {} .csv files to .parquet\n'.format(convertedFileCount))
 	if(len(failedConversions) > 0):
 		print('Failed to convert {} to .parquet\n'.format(failedConversions))
