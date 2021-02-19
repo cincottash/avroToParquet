@@ -13,10 +13,10 @@ Converts a given file from avro to parquet format
 A list of required libraries is located in requirments.txt and can be installed via Pip with ```pip install -r requirments.txt```
 
 ## Usage
-# Windows:
+### Windows:
 ```py main.py ```
 
-#Linux 
+### Linux 
 ```python3 main.py ```
 
 ## Built With
