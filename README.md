@@ -24,7 +24,7 @@ Converts a given file from avro to parquet format
 
 * If the parquetFiles directory doesn't exist, a new directory is created
 
-* If unable to read .CSV file, skips that file and notes that there was a conversion failure(s) as well as the failed file
+* If unable to read/convert .CSV file, skips that file and notes that there was a conversion failure(s) as well as the failed file
 
 * After converting each .CSV to .parquet, the temp CSV directory is deleted
 
