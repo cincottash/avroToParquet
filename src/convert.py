@@ -54,7 +54,7 @@ def csvToParquet(csvDirectory, parquetDirectory):
 	#try to convert csv files to parquet, if any exception happens while trying to convert a file, skip to the next file
 	for filename in os.listdir(csvDirectory):
 		if filename.endswith('.csv'):
-			#try:
+			try:
 			csvFile = pd.read_csv(csvDirectory + filename)
 			csvFile.to_parquet(parquetDirectory + filename.replace('.csv', '.parquet'))
 			except ImportError:
