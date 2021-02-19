@@ -18,13 +18,13 @@ Converts a given file from avro to parquet format
 
 * After converting to .CSV, the files are converted to .parquet
 
-* If unable to read .CSV file, skips that file and notes that their was a conversion failure
-
 * The parquet files are stored in a directory called "parquetFiles" located in the same directory as main.py
 
 * If the parquetFiles directory already exists, ALL of the .parquet files are deleted (only files with the .parquet file extension)
 
 * If the parquetFiles directory doesn't exist, a new directory is created
+
+* If unable to read .CSV file, skips that file and notes that there was a conversion failure(s) as well as the failed file
 
 * After converting each .CSV to .parquet, the temp CSV directory is deleted
 
