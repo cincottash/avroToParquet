@@ -14,30 +14,25 @@ def avroToCSV(avroDirectory, csvDirectory):
 			head = True
 			count = 0
 
-			#make sure we have permission to write to a file
-			try:
-				csvFile = csv.writer(open(csvDirectory + filename.replace('.avro', '.csv'), 'w+'))
-			except PermissionError:
-				print("Error, don't have permission to write to csv file")
-				exit(0)
-
 			#try to convert avro files to csv, if any exception happens while trying to convert a file, skip to the next file
 			with open(avroDirectory + filename, 'rb') as avroFile:
 				
 				try:
 					avroReader = reader(avroFile)
-
+					csvFile = csv.writer(open(csvDirectory + filename.replace('.avro', '.csv'), 'w+'))
 					for data in avroReader:
 						if head == True:
 							header = data.keys()
 							csvFile.writerow(header)
 							head = False
 						csvFile.writerow(data.values())
-				except Exception:
-					print('Failed to convert file {}\n'.format(avroFile))
+				except ValueError:
+					print('Failed to convert file {}\n'.format(filename))
 					avroFile.close()
 					failedConversions.append(filename)
-					os.remove(csvFile)
+				except PermissionError:
+					print("Error, don't have permission to write to csv file")
+					exit(0)
 					
 					continue
 			    
@@ -64,6 +59,7 @@ def csvToParquet(csvDirectory, parquetDirectory):
 				csvFile.to_parquet(parquetDirectory + filename.replace('.csv', '.parquet'))
 			except Exception:
 				failedConversions.append(filename)
+				os.remove(csvDirectory+filename)
 				continue
 		convertedFileCount += 1
 
