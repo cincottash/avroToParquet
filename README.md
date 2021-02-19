@@ -30,7 +30,7 @@ Converts a given file from avro to parquet format
 
 ## Prerequisites
 
-A list of required libraries is located in requirments.txt and can be installed via Pip with ```pip install -r requirments.txt```
+A list of required libraries is located in requirments.txt and can be installed via Pip with ```pip3 install -r requirments.txt```
 
 ## Usage
 ### Windows
@@ -52,8 +52,6 @@ INCLUD THE TRAILING SLASH FOR BOTH OPERATING SYSTEMS!!! <br/>
 * [Pandas](https://pandas.pydata.org/)
 
 * [Fastavro](https://fastavro.readthedocs.io/en/latest/)
-
-* [Pyarrow](https://pypi.org/project/pyarrow/)
 
 ## Known Issues
 
