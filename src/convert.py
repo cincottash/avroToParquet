@@ -55,8 +55,8 @@ def csvToParquet(csvDirectory, parquetDirectory):
 	for filename in os.listdir(csvDirectory):
 		if filename.endswith('.csv'):
 			try:
-			csvFile = pd.read_csv(csvDirectory + filename)
-			csvFile.to_parquet(parquetDirectory + filename.replace('.csv', '.parquet'))
+				csvFile = pd.read_csv(csvDirectory + filename)
+				csvFile.to_parquet(parquetDirectory + filename.replace('.csv', '.parquet'))
 			except ImportError:
 				print("Please install the modules in requirements.txt\n")
 				exit(0)
