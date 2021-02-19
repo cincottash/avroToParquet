@@ -26,15 +26,19 @@ def avroToCSV(avroDirectory, csvDirectory):
 							csvFile.writerow(header)
 							head = False
 						csvFile.writerow(data.values())
+				except ImportError:
+					print("Please install the modules in requirements.txt\n")
+					exit(0)
 				except ValueError:
 					print('Failed to convert file {}\n'.format(filename))
 					avroFile.close()
 					failedConversions.append(filename)
+					continue
 				except PermissionError:
 					print("Error, don't have permission to write to csv file")
 					exit(0)
 					
-					continue
+					
 			    
 			avroFile.close()
 			convertedFileCount += 1
