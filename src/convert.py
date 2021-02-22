@@ -14,7 +14,7 @@ def avroToCSV(avroDirectory, csvDirectory):
 			head = True
 			count = 0
 
-			#try to convert avro files to csv, if any exception happens while trying to convert a file, skip to the next file
+			#try to convert avro files to csv, if exception happens while trying to convert a file, skip to the next file
 			with open(avroDirectory + filename, 'rb') as avroFile:
 				
 				try:
@@ -74,8 +74,8 @@ def csvToParquet(csvDirectory, parquetDirectory):
 
 #delete csv files and then delete the temp directory
 def deleteCSV(csvDirectory):
+	print('Deleting temp csv directory\n')
 	try:
-		print('Deleting temp csv directory\n')
 		for filename in os.listdir(csvDirectory):
 			os.remove(csvDirectory + filename)
 		
