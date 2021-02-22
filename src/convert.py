@@ -1,4 +1,4 @@
-from fastavro import reader
+import fastavro
 import csv
 import pandas as pd
 import os
@@ -18,7 +18,7 @@ def avroToCSV(avroDirectory, csvDirectory):
 			with open(avroDirectory + filename, 'rb') as avroFile:
 				
 				try:
-					avroReader = reader(avroFile)
+					avroReader = fastavro.reader(avroFile)
 					csvFile = csv.writer(open(csvDirectory + filename.replace('.avro', '.csv'), 'w+'))
 					for data in avroReader:
 						if head == True:
@@ -29,8 +29,8 @@ def avroToCSV(avroDirectory, csvDirectory):
 				except ImportError:
 					print("Please install the modules in requirements.txt\n")
 					exit(0)
+				#thrown from fastavro.reader when failure to read .avro file, aka avro file is corrupted
 				except ValueError:
-					print('Failed to convert file {}\n'.format(filename))
 					avroFile.close()
 					failedConversions.append(filename)
 					continue
@@ -50,7 +50,7 @@ def csvToParquet(csvDirectory, parquetDirectory):
 
 	print('Converting .csv files to .parquet\n')
 
-	#try to convert csv files to parquet, if any exception happens while trying to convert a file, skip to the next file
+	#try to convert csv files to parquet, if exception happens while trying to convert a file, skip to the next file
 	for filename in os.listdir(csvDirectory):
 		if filename.endswith('.csv'):
 			try:
@@ -59,7 +59,8 @@ def csvToParquet(csvDirectory, parquetDirectory):
 			except ImportError:
 				print("Please install the modules in requirements.txt\n")
 				exit(0)
-			except Exception:
+			#thrown from pd.read_csv when error reading csv file, aka csv is corrupted
+			except pd.errors.ParserError:
 				failedConversions.append(filename)
 				os.remove(csvDirectory+filename)
 				continue

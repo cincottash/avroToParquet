@@ -34,6 +34,7 @@ def dirSetup():
 				deletedFileCount += 1
 			print('Deleted {} files from temp csv directory\n'.format(deletedFileCount))
 		else:
+			print('Creating temp csvFiles directory\n')
 			os.mkdir(csvDirectory)
 			print('Created temp csvFiles directory\n')
 	except PermissionError:
