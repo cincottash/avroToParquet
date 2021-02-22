@@ -75,6 +75,7 @@ def csvToParquet(csvDirectory, parquetDirectory):
 #delete csv files and then delete the temp directory
 def deleteCSV(csvDirectory):
 	try:
+		print('Deleting temp csv directory\n')
 		for filename in os.listdir(csvDirectory):
 			os.remove(csvDirectory + filename)
 		
