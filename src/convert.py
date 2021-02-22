@@ -26,6 +26,8 @@ def avroToCSV(avroDirectory, csvDirectory):
 							csvFile.writerow(header)
 							head = False
 						csvFile.writerow(data.values())
+					avroFile.close()
+					convertedFileCount += 1
 				except ImportError:
 					print("Please install the modules in requirements.txt\n")
 					exit(0)
@@ -34,9 +36,6 @@ def avroToCSV(avroDirectory, csvDirectory):
 					avroFile.close()
 					failedConversions.append(filename)
 					continue
-			    
-			avroFile.close()
-			convertedFileCount += 1
 
 	print('Converted {} .avro files to .csv\n'.format(convertedFileCount))
 	if(len(failedConversions) > 0):
@@ -56,6 +55,7 @@ def csvToParquet(csvDirectory, parquetDirectory):
 			try:
 				csvFile = pd.read_csv(csvDirectory + filename)
 				csvFile.to_parquet(parquetDirectory + filename.replace('.csv', '.parquet'))
+				convertedFileCount += 1
 			except ImportError:
 				print("Please install the modules in requirements.txt\n")
 				exit(0)
@@ -64,7 +64,6 @@ def csvToParquet(csvDirectory, parquetDirectory):
 				failedConversions.append(filename)
 				os.remove(csvDirectory+filename)
 				continue
-		convertedFileCount += 1
 
 	print('Converted {} .csv files to .parquet\n'.format(convertedFileCount))
 
