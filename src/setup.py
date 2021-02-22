@@ -16,7 +16,7 @@ def dirSetup():
 		print('Error, missing avro files direcectory, please include trailing slash')
 		exit(0)
 	except PermissionError:
-		print('Error, mission write privileges on avro directory')
+		print('Error, missing privileges on avro directory')
 		exit(0)
 
 	#the output dir is one level above the .avro files dir
@@ -37,7 +37,7 @@ def dirSetup():
 			os.mkdir(csvDirectory)
 			print('Created temp csvFiles directory\n')
 	except PermissionError:
-		print('Error, mission write privileges on csv directory')
+		print('Error, missing privileges on csv directory')
 		exit(0)
 	
 	#if the parquet dir already exists, loop through it and delete every .parquet file in it

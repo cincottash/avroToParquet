@@ -34,11 +34,6 @@ def avroToCSV(avroDirectory, csvDirectory):
 					avroFile.close()
 					failedConversions.append(filename)
 					continue
-				except PermissionError:
-					print("Error, don't have permission to write to csv file")
-					exit(0)
-					
-					
 			    
 			avroFile.close()
 			convertedFileCount += 1
