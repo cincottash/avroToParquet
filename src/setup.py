@@ -15,7 +15,7 @@ def dirSetup():
 	Returns: 
 	str:avroDirectory, String representing the path of where the avro files are stored
 	str:csvDirectory, String representing the path of where the temporary csv directory will be stored
-	str:parquet Directory, String representing the path of where the output parquet files will be stored
+	str:parquetDirectory, String representing the path of where the output parquet files will be stored
 	
 	'''
 
