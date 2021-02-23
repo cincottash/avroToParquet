@@ -1,6 +1,6 @@
 # avroToParquet
 
-Converts a given file from avro to parquet format 
+Converts avro files to parquet format 
 
 ## Features
 
