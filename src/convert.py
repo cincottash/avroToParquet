@@ -25,7 +25,6 @@ def avroToCSV(avroDirectory, csvDirectory):
 			head = True
 			count = 0
 
-			#try to convert avro files to csv, if exception happens while trying to convert a file, skip to the next file
 			with open(avroDirectory + filename, 'rb') as avroFile:
 				
 				try:
@@ -39,11 +38,17 @@ def avroToCSV(avroDirectory, csvDirectory):
 						csvFile.writerow(data.values())
 					avroFile.close()
 					convertedFileCount += 1
+
+				except PermissionError:
+					#Reading from avro is already checked in dirSetup(), so permission error is probably from the csv writer
+					print('Error failed writing csv file, possible missing privileges on temp csv directory\n')
+					exit(0)
 				except ImportError:
-					print("Please install the modules in requirements.txt\n")
+					print('Error missing modules, please install the modules in requirements.txt\n')
 					exit(0)
 				#thrown from fastavro.reader when failure to read .avro file, aka avro file is corrupted
 				except ValueError:
+					print('Warning, read failed... skipping file {}'.format(avroFile))
 					avroFile.close()
 					failedConversions.append(filename)
 					continue
@@ -104,6 +109,7 @@ def deleteCSV(csvDirectory):
 	Returns: None
 	
 	'''
+
 	print('Deleting temp csv directory\n')
 	try:
 		for filename in os.listdir(csvDirectory):
