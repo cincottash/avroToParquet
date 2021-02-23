@@ -5,7 +5,8 @@ import os
 
 def avroToCSV(avroDirectory, csvDirectory):
 	'''
-	Converts all .avro files from a user supplied directory into csv files contained in a temp directory
+	Converts all .avro files from a user supplied directory into csv files contained in a temp directory,
+	if reading avro file fails, move on to the next file
 
 	Parameters:
 	avroDirectory (str): A string representing the location of the directory containing the avro files
@@ -15,6 +16,7 @@ def avroToCSV(avroDirectory, csvDirectory):
 	
 	'''
 
+	#holds the names of files that couldn't be converted to csv
 	failedConversions = []
 	convertedFileCount = 0
 
@@ -61,7 +63,8 @@ def avroToCSV(avroDirectory, csvDirectory):
 
 def csvToParquet(csvDirectory, parquetDirectory):
 	'''
-	Converts all csv files from a temporary directory into parquet files contained in an output directory
+	Converts all csv files from a temporary directory into parquet files contained in an output directory,
+	if conversion fails for a csv file, continue to the next csv file
 
 	Parameters:
 	csvDirectory (str): A string representing the location of the directory containing the temporary csv files
@@ -76,7 +79,6 @@ def csvToParquet(csvDirectory, parquetDirectory):
 
 	print('Converting .csv files to .parquet\n')
 
-	#try to convert csv files to parquet, if exception happens while trying to convert a file, skip to the next file
 	for filename in os.listdir(csvDirectory):
 		if filename.endswith('.csv'):
 			try:
@@ -86,7 +88,7 @@ def csvToParquet(csvDirectory, parquetDirectory):
 			except ImportError:
 				print("Please install the modules in requirements.txt\n")
 				exit(0)
-			#thrown from pd.read_csv when error reading csv file, aka csv is corrupted
+			#thrown from pd.read_csv when error reading csv file, meaning the csv is corrupted, just skip to the next file
 			except pd.errors.ParserError:
 				failedConversions.append(filename)
 				os.remove(csvDirectory+filename)
