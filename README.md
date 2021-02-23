@@ -53,4 +53,6 @@ INCLUD THE TRAILING SLASH FOR BOTH OPERATING SYSTEMS!!! <br/>
 
 * [Fastavro](https://fastavro.readthedocs.io/en/latest/)
 
+* [Pyarrow](https://arrow.apache.org/docs/python/install.html)
+
 
