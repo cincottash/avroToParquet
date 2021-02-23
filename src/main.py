@@ -2,6 +2,14 @@ from setup import *
 from convert import *
 
 def main():
+	'''
+	Parameters: None
+
+	Initializes directories, converts avro files -> csv -> parquet files, then deletes the csv files
+
+	Returns: None
+	
+	'''
 
 	avroDirectory, csvDirectory, parquetDirectory = dirSetup()
 	

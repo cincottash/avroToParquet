@@ -4,6 +4,17 @@ import pandas as pd
 import os
 
 def avroToCSV(avroDirectory, csvDirectory):
+	'''
+	Converts all .avro files from a user supplied directory into csv files contained in a temp directory
+
+	Parameters:
+	avroDirectory (str): A string representing the location of the directory containing the avro files
+	csvDirectory (str): A string representing the location of the directory containing the temporary csv files
+
+	Returns: None
+	
+	'''
+
 	failedConversions = []
 	convertedFileCount = 0
 
@@ -44,6 +55,17 @@ def avroToCSV(avroDirectory, csvDirectory):
 		print('Successfully Converted all .avro files to .csv\n')
 
 def csvToParquet(csvDirectory, parquetDirectory):
+	'''
+	Converts all csv files from a temporary directory into parquet files contained in an output directory
+
+	Parameters:
+	csvDirectory (str): A string representing the location of the directory containing the temporary csv files
+	parquetDirectory (str): A string representing the location of the directory which will contain the parquet files
+	
+	Returns: None
+	
+	'''
+
 	failedConversions=[]
 	convertedFileCount = 0
 
@@ -72,8 +94,16 @@ def csvToParquet(csvDirectory, parquetDirectory):
 	else:
 		print('Successfully converted all .csv files to .parquet\n')
 
-#delete csv files and then delete the temp directory
 def deleteCSV(csvDirectory):
+	'''
+	Deletes all csv files from a temporary directory and then deletes the directory
+
+	Parameters:
+	csvDirectory (str): A string representing the location of the directory containing the temporary csv files
+	
+	Returns: None
+	
+	'''
 	print('Deleting temp csv directory\n')
 	try:
 		for filename in os.listdir(csvDirectory):

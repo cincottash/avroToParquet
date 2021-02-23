@@ -1,7 +1,21 @@
 import os 
-from pathlib import Path
+import pathlib
+
+
 
 def dirSetup():
+	'''
+	Verifies the existence of avro directory from input, 
+	as well as creating or clearing the temp csv and parquet directory
+
+	Parameters: None
+
+	Returns: 
+	str:avroDirectory, String representing the path of where the avro files are stored
+	str:csvDirectory, String representing the path of where the temporary csv folder will be stored
+	str:parquet Directory, String representing the path of where the output parquet files will be stored
+	
+	'''
 
 	avroDirectory = str(input('Please input the folder containing .avro files\n'))
 	
@@ -20,7 +34,7 @@ def dirSetup():
 		exit(0)
 
 	#the output dir is one level above the .avro files dir
-	outputDirectory = str(Path(avroDirectory).parents[0])
+	outputDirectory = str(pathlib.Path(avroDirectory).parents[0])
 	csvDirectory = outputDirectory + '/csvFilesTemp/'
 	parquetDirectory = outputDirectory + '/parquetFiles/'
 
