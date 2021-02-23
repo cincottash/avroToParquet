@@ -6,6 +6,8 @@ Converts a given file from avro to parquet format
 
 * Reads .avro files located within the specified directory
 
+* If unable to read .avro file, skips that file and notes that their was a conversion failure
+
 * Converts each .avro file into a .CSV, stores the .CSV files in a temp directory
 
 * The CSV files are stored in a directory called "csvFilesTemp" located in the same directory as the avro files directory
@@ -13,8 +15,6 @@ Converts a given file from avro to parquet format
 * If csvFilesTemp already exists (e.g from a previous-uncompleted run), ALL the files are removed
 
 * If csvFilesTemp doesn't exist, a new directory is created
-
-* If unable to read .avro file, skips that file and notes that their was a conversion failure
 
 * After converting to .CSV, the files are converted to .parquet
 
