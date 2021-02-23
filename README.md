@@ -40,8 +40,8 @@ A list of required libraries is located in requirments.txt and can be installed 
 ```python3 main.py ```
 
 You will then be prompted for the directory containing the .avro files <br/>
-An example vaild directory for Windows is "C:\Users\USERNAME\Desktop\avroFiles\" <br/>
-An example vaild directory for Linux is "/home/USERNAME/Desktop/avroFiles/" <br/>
+An example vaild directory for Windows is C:\Users\USERNAME\Desktop\avroFiles\\ <br/>
+An example vaild directory for Linux is /home/USERNAME/Desktop/avroFiles/ <br/>
 
 INCLUD THE TRAILING SLASH FOR BOTH OPERATING SYSTEMS!!! <br/>
 
@@ -53,5 +53,4 @@ INCLUD THE TRAILING SLASH FOR BOTH OPERATING SYSTEMS!!! <br/>
 
 * [Fastavro](https://fastavro.readthedocs.io/en/latest/)
 
-## Known Issues
 
