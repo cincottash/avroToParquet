@@ -7,19 +7,21 @@ def dirSetup():
 	'''
 	Verifies the existence of avro directory from input, 
 	as well as creating or clearing the temp csv and parquet directory
+		If a directory with the same name as the temp csv directory already exists, all the csv files within are deleted
+		If a directory with the same name as the parquet directory already exists, ONLY the parquet files are deleted
 
 	Parameters: None
 
 	Returns: 
 	str:avroDirectory, String representing the path of where the avro files are stored
-	str:csvDirectory, String representing the path of where the temporary csv folder will be stored
+	str:csvDirectory, String representing the path of where the temporary csv directory will be stored
 	str:parquet Directory, String representing the path of where the output parquet files will be stored
 	
 	'''
 
 	avroDirectory = str(input('Please input the folder containing .avro files\n'))
 	
-	#make sure avro files folder exists
+	#make sure avro files directory exists
 	try:
 		os.listdir(avroDirectory)
 
@@ -33,13 +35,13 @@ def dirSetup():
 		print('Error, missing privileges on avro directory')
 		exit(0)
 
-	#the output dir is one level above the .avro files dir
+	#the output directory (where the temp files and parquet files will be located) is one level above the avro files dir
 	outputDirectory = str(pathlib.Path(avroDirectory).parents[0])
 	csvDirectory = outputDirectory + '/csvFilesTemp/'
 	parquetDirectory = outputDirectory + '/parquetFiles/'
 
-	#if csv dir already exists, clear all the files in it
 	try:
+		#if csv directory already exists, clear all the files in it
 		if os.path.isdir(csvDirectory):
 			print('Clearing temp csvFiles directory\n')
 			deletedFileCount = 0
@@ -47,6 +49,7 @@ def dirSetup():
 				os.remove(csvDirectory + filename)
 				deletedFileCount += 1
 			print('Deleted {} files from temp csv directory\n'.format(deletedFileCount))
+		#just make the directory otherwise
 		else:
 			print('Creating temp csvFiles directory\n')
 			os.mkdir(csvDirectory)
@@ -55,8 +58,8 @@ def dirSetup():
 		print('Error, missing privileges on csv directory')
 		exit(0)
 	
-	#if the parquet dir already exists, loop through it and delete every .parquet file in it
 	try:
+		#if the parquet directory already exists, loop through it and delete every parquet file in it
 		if os.path.isdir(parquetDirectory):
 			print('Deleting existing .parquet files\n')
 			deletedFileCount = 0
@@ -65,6 +68,7 @@ def dirSetup():
 					os.remove(parquetDirectory + filename)
 					deletedFileCount += 1
 			print('Deleted {} .parquet files\n'.format(deletedFileCount))
+		#otherwise just make the directory
 		else:
 			os.mkdir(parquetDirectory)  
 			print('Created parquetFiles directory\n')
