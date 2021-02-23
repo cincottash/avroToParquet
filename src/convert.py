@@ -16,7 +16,7 @@ def avroToCSV(avroDirectory, csvDirectory):
 	
 	'''
 
-	#holds the names of files that couldn't be converted to csv
+	#holds the names of avro files that couldn't be converted to csv
 	failedConversions = []
 	convertedFileCount = 0
 
@@ -74,6 +74,7 @@ def csvToParquet(csvDirectory, parquetDirectory):
 	
 	'''
 
+	#holds the names of csv files that couldn't be converted to parquet
 	failedConversions=[]
 	convertedFileCount = 0
 
